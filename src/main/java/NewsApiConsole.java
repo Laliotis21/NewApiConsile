@@ -10,7 +10,9 @@ import services.NewApiService;
 import model.NewsCountry;
 import model.NewsCategory;
 import model.Searchinglanguage;
-
+/*
+ * https://github.com/Laliotis21/NewApiConsile
+ */
 public class NewsApiConsole {
 
 	public static void main(String[] args) throws NewsApiException {{
@@ -32,9 +34,8 @@ public class NewsApiConsole {
 
 			switch (input) {
 			case "1":
-				
-				/**Choose top headline
-				 * 
+				/**
+				 * Choose top headline
 				 */
 				System.out.println("If you want news from another country different from yours type 'yes' else type 'no'");
 				String searchParam8 = sc.nextLine();
@@ -66,7 +67,7 @@ public class NewsApiConsole {
 						String searchParam9 = sc.nextLine();
 						NewsCategory[] category = NewsCategory.values();
 						for(NewsCategory categories : category )
-						//
+						
 						{
 							
 							List<NewsInfo> results;
