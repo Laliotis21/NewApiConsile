@@ -2,6 +2,7 @@
 import java.util.List;
 import java.util.Scanner;
 
+
 import exception.NewsApiException;
 import model.NewsAPi;
 import model.NewsInfo;
@@ -31,12 +32,19 @@ public class NewsApiConsole {
 
 			switch (input) {
 			case "1":
-				System.out.println("if you want news from another country different from yours type 'yes' else type 'no'");
+				
+				/**Choose top headline
+				 * 
+				 */
+				System.out.println("If you want news from another country different from yours type 'yes' else type 'no'");
 				String searchParam8 = sc.nextLine();
 				System.out.println("If you want news from  all below categories type 'yes' else type 'no'");
 				System.out.println(java.util.Arrays.asList(NewsCategory.values()));
 				String searchParam11 = sc.nextLine();
 				try {
+					/**
+					 * If you want news from another country for specific category
+					 */
 					if(searchParam8.equals("yes") &&  searchParam11.equals("no")) {
 					System.out.println("Enter Country from:");
 					System.out.println(java.util.Arrays.asList(NewsCountry.values()));
@@ -49,19 +57,28 @@ public class NewsApiConsole {
 					System.out.println("Results are: ");
 					System.out.println(results);
 					}
+					/**
+					 *If you want news from another country for all  categories
+					 */
 					else if (searchParam8.equals("yes") &&  searchParam11.equals("yes")) {
 						System.out.println("Enter Country from:");
 						System.out.println(java.util.Arrays.asList(NewsCountry.values()));
 						String searchParam9 = sc.nextLine();
 						NewsCategory[] category = NewsCategory.values();
-						for(NewsCategory categor: category )
+						for(NewsCategory categories : category )
+						//
 						{
+							
 							List<NewsInfo> results;
-							results = newsDBService.searchFortopHeadlines(searchParam9, categor.toString());
+							results = newsDBService.searchFortopHeadlines(searchParam9, categories.name());
 							System.out.println("Results are: ");
 							System.out.println(results);
-						}
+							}
+						
 					}
+					/**
+					 * If you want news from your country for all  categories
+					 */
 					else if (searchParam8.equals("no") &&  searchParam11.equals("yes")) {
 						String results2;
 						results2 = newsDBService.getlocationData().getCountryCode();
@@ -69,16 +86,19 @@ public class NewsApiConsole {
 						for(NewsCategory categor: category )
 							{
 								List<NewsInfo> results;
-								results = newsDBService.searchFortopHeadlines(results2, categor.toString());
+								results = newsDBService.searchFortopHeadlines(results2, categor.name());
 								System.out.println("Results are: ");
 								System.out.println(results);
 							}
 					}
+					/**
+					 *If you want news from your country for specific category
+					 */
 					else {
 					String results2;
 					results2 = newsDBService.getlocationData().getCountryCode();	
 					List<NewsInfo> results;
-					System.out.println("Enter Category from:");
+					System.out.println("Select Category from:");
 					System.out.println(java.util.Arrays.asList(NewsCategory.values()));
 					String searchParam2 = sc.nextLine();
 					results = newsDBService.searchFortopHeadlines(results2, searchParam2);
@@ -92,6 +112,9 @@ public class NewsApiConsole {
 				
 				break;
 			case "2":
+				/*
+				 * for everything searching .
+				 */
 				System.out.println("Selected 2");
 				System.out.print("Keyword or phrase to search for in the article title and body: ");
 				String searchParam3 = sc.nextLine();
